@@ -1,0 +1,11 @@
+{
+  "name": "bardare",
+  "dependencies": {},
+  "devDependencies": {},
+  "ambientDependencies": {
+    "MediaStream": "github:DefinitelyTyped/DefinitelyTyped/webrtc/MediaStream.d.ts#9027703c0bd831319dcdf7f3169f7a468537f448",
+    "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
+    "pixi.js": "github:DefinitelyTyped/DefinitelyTyped/pixi.js/pixi.js.d.ts#5a5d2f56dc94201f386fa7b79d00aef4a6e21ca7",
+    "webspeechapi": "github:DefinitelyTyped/DefinitelyTyped/webspeechapi/webspeechapi.d.ts#ec8cccc29b5f37df43a7dd56777dc09670a5e671"
+  }
+}
