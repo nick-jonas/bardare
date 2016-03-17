@@ -9,11 +9,20 @@ import {Player} from '../model/player'
   template: `
       <div class="current-player">player: {{currentPlayer?.name}}</div>
       <div class="current-challenge">challenge: {{currentChallenge?.copy}}</div>
+      <div *ngIf="isPlaying">
+        <button (click)="fail()">Nailed it!</button>
+        <button (click)="success()">No way Jose.</button>
+      </div>
+      <div *ngIf="!isPlaying">
+        <button (click)="newRound()">Another Round</button>
+        <button (click)="endGame()">End Game</button>
+      </div>
   `
 })
 
 export class Play {
 
+  isPlaying:boolean = true
   currentPlayer:Player
   currentChallenge:Challenge
 
@@ -30,6 +39,22 @@ export class Play {
     }
     this.currentChallenge = this.gameService.challenge
     this.currentPlayer = this.gameService.getRandomPlayer()
+  }
+
+  fail(){
+
+  }
+
+  success(){
+
+  }
+
+  newRound(){
+
+  }
+
+  endGame(){
+    
   }
 
 
