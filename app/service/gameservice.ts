@@ -1,19 +1,34 @@
 import {Injectable} from 'angular2/core'
 import {Player} from '../model/player'
-import {Challenge} from '../model/challenge'
+
+export interface Challenge {
+  name: string
+}
+
+export interface Category {
+  name: string,
+  challenges: Array<Challenge>
+}
 
 export class GameService {
 
   public players:Array<Player> = []
-  private _difficulty:string = 'easy'
+  private _category:Category
   private _challenge:Challenge
-
-  private challenges:Array<Challenge> = [
-      new Challenge('challenge 1'),
-      new Challenge('challenge 2'),
-      new Challenge('challenge 3'),
-      new Challenge('challenge 4')
-  ]
+  public categories: Array<Category> = [
+    {
+      name: 'slip it in',
+      challenges: [{ name: 'challenge 1' }, { name: 'challenge 2' }]
+    },
+    {
+      name: 'conversation starters',
+      challenges: [{ name: 'challenge 1' }, { name: 'challenge 2' }]
+    },
+    {
+      name: 'drink-related',
+      challenges: [{ name: 'challenge 1' }, { name: 'challenge 2' }]
+    }
+  ];
 
   constructor(){}
 
@@ -22,16 +37,16 @@ export class GameService {
   }
 
   getRandomChallenge():Challenge{
-    return this.challenges[Math.floor(Math.random() * this.challenges.length)]
+    let challenges = this._category.challenges
+    return challenges[Math.floor(Math.random() * challenges.length)]
   }
 
   getRandomPlayer():Player{
     return this.players[Math.floor(Math.random() * this.players.length)] 
   }
 
-
-  set difficulty(diff:string){
-    this._difficulty = diff
+  set category(cat:Category){
+    this._category = cat
   }
 
   set challenge(challenge:Challenge){
@@ -40,6 +55,20 @@ export class GameService {
 
   get challenge():Challenge{
     return this._challenge
+  }
+
+  get category():Category{
+    return this._category
+  }
+
+  getWinner():Array<Player>{
+    let winners:Array<Player> = []
+    for (let i = 0; i < this.players.length; i++){
+      if(winners.length === 0 || this.players[i].wins.length >= winners[0].wins.length){
+        winners.push(this.players[i])
+      }
+    }
+    return winners
   }
 
 

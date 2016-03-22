@@ -15,7 +15,7 @@ import {GameService} from '../service/gameservice'
       <input type="text" class="form-control" required [(ngModel)]="currentPlayer.name">
       <button type="button" class="btn add-player" (click)="newPlayer()">Add Player</button>
     </form>
-    <a *ngIf="players.length > 0" [routerLink]="['SelectLevel']">Start Round</a>
+    <a *ngIf="players.length > 0" [routerLink]="['SelectCategory']">Start Round</a>
 
     <ul>
       <li *ngFor="#player of players">{{player.name}} | {{player.avatar}}</li>
@@ -30,14 +30,14 @@ export class AddPlayers {
     'person1', 'person2', 'person3'
   ]
 
-  currentPlayer:Player = new Player('', '')
+  currentPlayer:Player = new Player('', '', [], [])
   players:Array<Player> = []
 
   constructor(private gameService:GameService){
   }
 
   newPlayer(){
-    let player: Player = new Player(this.currentPlayer.name, 'avatarlink')
+    let player: Player = new Player(this.currentPlayer.name, 'avatarlink', [], [])
     this.players.push(player)
     this.gameService.addPlayer(Object.assign({}, player))
     this.currentPlayer.name = ''
