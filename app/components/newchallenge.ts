@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core'
-import {Router} from 'angular2/router'
-import {GameService, Challenge} from '../service/gameservice'
+import {Router, RouterLink} from 'angular2/router'
+import {GameService} from '../service/gameservice'
+import {Challenge} from '../model/challenges'
 
 @Component({
   selector: 'challenge',
@@ -8,8 +9,10 @@ import {GameService, Challenge} from '../service/gameservice'
       <div class="current-challenge">
         {{currentChallenge?.name}}
       </div>
-     <button (click)="startChallenge()">Let's do it</button>
-     <button (click)="newChallenge()">Skip</button>
+     <div class="button-wrap">
+       <button (click)="newChallenge()" class="button white skip">Skip</button>
+       <button (click)="startChallenge()" class="button white game-on">Game on!</button>
+     </div>
   `
 })
 
@@ -18,8 +21,8 @@ export class NewChallenge {
   currentChallenge:Challenge
 
   constructor(private gameService: GameService, private _router: Router) {
-    if(!this.gameService.category){
-      this._router.navigate(['SelectCategory']);  
+    if (this.gameService.players.length === 0) {
+      this._router.navigate(['AddPlayers'])
     }else{
       this.newChallenge()
     }

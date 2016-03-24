@@ -7,19 +7,35 @@ import {GameService} from '../service/gameservice'
   selector: 'add-players',
   directives: [RouterLink],
   template: `
-    <h2>Add Players</h2>
-    <ul>
-      <li *ngFor="#avatar of avatars">{{avatar}}</li>
-    </ul>
-    <form>
-      <input type="text" class="form-control" required [(ngModel)]="currentPlayer.name">
-      <button type="button" class="btn add-player" (click)="newPlayer()">Add Player</button>
-    </form>
-    <a *ngIf="players.length > 0" [routerLink]="['SelectCategory']">Start Round</a>
+    <div class="new-player-wrap" *ngIf="players.length === 0 || showAddNewPlayer">
+      <div class="avatar-wrap">
+        <ul>
+          <li class="spacer"></li>
+          <li *ngFor="#avatar of avatars" class="avatar">
+            <div class="avatar-img">
+              <img [attr.src]="avatar" alt="" />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <input type="text" class="form-control" required [(ngModel)]="currentPlayer.name" placeholder="Type name">
+    </div>
 
-    <ul>
-      <li *ngFor="#player of players">{{player.name}} | {{player.avatar}}</li>
-    </ul>
+    <div class="button-group">
+      <button type="button" class="button white add-player" (click)="newPlayer()">Add Player</button>
+      <a *ngIf="players.length > 1" [routerLink]="['NewChallenge']" class="button white">Start Round</a>
+    </div>
+    
+    <div class="current-players-wrap" *ngIf="players.length > 0 && !showAddNewPlayer">
+      <ul>
+        <li *ngFor="#player of players">
+          <div class="avatar-img">
+            <img [attr.src]="player.avatar" alt="" />
+          </div>
+          <h3 class="player-name">{{player.name}}</h3>
+        </li>
+      </ul>
+    </div>
     `
 
 })
@@ -27,17 +43,23 @@ import {GameService} from '../service/gameservice'
 export class AddPlayers {
 
   avatars:Array<string> = [
-    'person1', 'person2', 'person3'
+    'img/avatars/1.png', 'img/avatars/2.png', 'img/avatars/3.png', 'img/avatars/4.png', 'img/avatars/5.png', 'img/avatars/6.png',
   ]
 
   currentPlayer:Player = new Player('', '', [], [])
   players:Array<Player> = []
+  showAddNewPlayer:boolean = false
 
   constructor(private gameService:GameService){
   }
 
   newPlayer(){
-    let player: Player = new Player(this.currentPlayer.name, 'avatarlink', [], [])
+    if (this.currentPlayer.name === '') {
+      this.showAddNewPlayer = true
+      return
+    }
+    this.showAddNewPlayer = false
+    let player: Player = new Player(this.currentPlayer.name, this.avatars[0], [], [])
     this.players.push(player)
     this.gameService.addPlayer(Object.assign({}, player))
     this.currentPlayer.name = ''

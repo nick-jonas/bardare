@@ -1,34 +1,11 @@
 import {Injectable} from 'angular2/core'
 import {Player} from '../model/player'
-
-export interface Challenge {
-  name: string
-}
-
-export interface Category {
-  name: string,
-  challenges: Array<Challenge>
-}
+import {challenges, Challenge} from '../model/challenges'
 
 export class GameService {
 
   public players:Array<Player> = []
-  private _category:Category
   private _challenge:Challenge
-  public categories: Array<Category> = [
-    {
-      name: 'slip it in',
-      challenges: [{ name: 'challenge 1' }, { name: 'challenge 2' }]
-    },
-    {
-      name: 'conversation starters',
-      challenges: [{ name: 'challenge 1' }, { name: 'challenge 2' }]
-    },
-    {
-      name: 'drink-related',
-      challenges: [{ name: 'challenge 1' }, { name: 'challenge 2' }]
-    }
-  ];
 
   constructor(){}
 
@@ -37,16 +14,11 @@ export class GameService {
   }
 
   getRandomChallenge():Challenge{
-    let challenges = this._category.challenges
     return challenges[Math.floor(Math.random() * challenges.length)]
   }
 
   getRandomPlayer():Player{
     return this.players[Math.floor(Math.random() * this.players.length)] 
-  }
-
-  set category(cat:Category){
-    this._category = cat
   }
 
   set challenge(challenge:Challenge){
@@ -55,10 +27,6 @@ export class GameService {
 
   get challenge():Challenge{
     return this._challenge
-  }
-
-  get category():Category{
-    return this._category
   }
 
   getWinner():Array<Player>{

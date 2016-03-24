@@ -1,4 +1,4 @@
-import {Challenge} from './challenge'
+import {Challenge} from './challenges'
 
 export class Player {
   constructor(

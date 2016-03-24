@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core'
 import {Router} from 'angular2/router'
-import {Challenge, GameService} from '../service/gameservice'
+import {GameService} from '../service/gameservice'
+import {Challenge} from '../model/challenges'
 import {Player} from '../model/player'
 
 @Component({

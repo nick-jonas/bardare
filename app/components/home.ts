@@ -5,8 +5,11 @@ import {RouterLink} from 'angular2/router'
   selector: 'home',
   directives: [RouterLink],
   template: `
-    <h2>Home</h2>
-    <a [routerLink]="['AddPlayers']">Start</a>
+    <div class="title">
+      <h2>Bar Dare</h2>
+      <h3>A game about guts.</h3>
+    </div>
+    <a class="button" [routerLink]="['AddPlayers']">Let's Play!</a>
     `
 
 })
