@@ -5,7 +5,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router'
 import {Home} from './home'
 import {AddPlayers} from './addplayers'
 import {NewChallenge} from './newchallenge'
-import {Play} from './play'
+import {Score} from './score'
 
 @Component({
     selector: 'app',
@@ -21,7 +21,7 @@ import {Play} from './play'
     { path: '/', name: 'Index', component: Home },
     { path: '/players', name: 'AddPlayers', component: AddPlayers},
     { path: '/challenge', name: 'NewChallenge', component: NewChallenge },
-    { path: '/play', name: 'Play', component: Play },
+    { path: '/score', name: 'Score', component: Score},
     { path: '/**', redirectTo: ['Index'] }
 ])
 
