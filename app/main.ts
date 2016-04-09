@@ -11,6 +11,7 @@ import {GameService} from './service/gameservice'
 // enableProdMode();
 bootstrap(App, [
     GameService,
+    provide(LocationStrategy, { useClass: HashLocationStrategy }),
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS])
     .catch(err => console.error(err));
